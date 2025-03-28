@@ -1,0 +1,9 @@
+# !/bin/bash
+
+echo "Number of processes running for monitoring"
+ps aux | tail -n +2 | wc -l
+
+echo "Enter a pattern to filter"
+read pattern
+
+ps aux | grep -i $pattern
