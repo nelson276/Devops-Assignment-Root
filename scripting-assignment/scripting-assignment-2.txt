@@ -1,0 +1,52 @@
+#!/bin/bash
+
+while true; do
+  echo "Choose an option:"
+  echo "1. Backup"
+  echo "2. Cleanup"
+  echo "3. Update System"
+  echo "4. Monitor System"
+  echo "5. Check Disk Space"
+  echo "6. Exit"
+
+  read -p "Enter your choice (1-6): " choice
+
+  if [[ "$choice" == "1" ]]; then
+    if [ -f backup.sh ]; then
+      bash backup.sh
+    else
+      echo "Error: backup.sh not found."
+    fi
+  elif [[ "$choice" == "2" ]]; then
+    if [ -f cleanup.sh ]; then
+      bash cleanup.sh
+    else
+      echo "Error: cleanup.sh not found."
+    fi
+  elif [[ "$choice" == "3" ]]; then
+    if [ -f update_system.sh ]; then
+      bash update_system.sh
+    else
+      echo "Error: update_system.sh not found."
+    fi
+  elif [[ "$choice" == "4" ]]; then
+    if [ -f monitor.sh ]; then
+      bash monitor.sh
+    else
+      echo "Error: monitor.sh not found."
+    fi
+  elif [[ "$choice" == "5" ]]; then
+    if [ -f disk_space.sh ]; then
+      bash disk_space.sh
+    else
+      echo "Error: disk_space.sh not found."
+    fi
+  elif [[ "$choice" == "6" ]]; then
+    echo "Exiting..."
+    exit 0
+  else
+    echo "Invalid choice. Please enter a number between 1 and 6."
+  fi
+
+  echo ""
+done
