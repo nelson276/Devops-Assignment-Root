@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manual-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: manual-server
+  template:
+    metadata:
+      labels:
+        app: manual-server
+    spec:
+      containers:
+      - name: manual-server
+        image: nelson447/manual-server
+        ports:
+        - containerPort: 80
