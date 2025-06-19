@@ -1,0 +1,5 @@
+- name: Deploy Node.js App on EC2
+  hosts: web
+  become: yes
+  roles:
+    - nodeapp

@@ -1,0 +1,33 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Ensure node-app directory exists
+  stat:
+    path: /home/ec2-user/node-app
+  register: app_dir
+
+- name: Clone repo if not present
+  git:
+    repo: https://github.com/priyabuss2004/node-app.git
+    dest: /home/ec2-user/node-app
+    update: yes
+  when: not app_dir.stat.exists
+
+- name: Pull latest changes if repo already exists
+  git:
+    repo: https://github.com/priyabuss2004/node-app.git
+    dest: /home/ec2-user/node-app
+    update: yes
+    force: yes
+  when: app_dir.stat.exists
+
+- name: Install npm dependencies
+  npm:
+    path: /home/ec2-user/node-app
+    production: no
+
+- name: Run the Node.js app
+  shell: nohup npm start &
+  args:
+    chdir: /home/ec2-user/node-app
+    creates: /home/ec2-user/node-app/nohup.out
+
